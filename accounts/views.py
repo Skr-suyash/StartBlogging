@@ -9,7 +9,7 @@ def signup(request):
     if request.method == 'POST':
         try:
             user = User.objects.get(username=request.POST['username'])
-            return render(request, 'accounts/signup', {'error': 'Username already exists.'})
+            return render(request, 'accounts/signup.html', {'error': 'Username already exists.'})
         except User.DoesNotExist:
             user = User.objects.create_user(username=request.POST['username'], email=request.POST['email'], password=request.POST['password'])
             auth.login(request, user)

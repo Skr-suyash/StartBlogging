@@ -20,11 +20,17 @@
 	
 	<div class="limiter">
 		<div class="container-login100">
+			<div style="text-align: center;">
 			<div class="wrap-login100">
-				<div class="login100-pic js-tilt" data-tilt>
+				{% if error %}
+				<div class="container">
+					<span class="login100-form-title" style="font-size: medium; color: red; vertical-align: top;"><i class="fa fa-info-circle" style="margin-right: 10px;"></i>{{error}}</span>
+				</div>
+				{% endif %}
+
+				<div class="login100-pic js-tilt" data-tilt">
 					<img src="{% static 'images/login-img.png' %}" alt="IMG">
 				</div>
-
 				<form class="login100-form validate-form" method="POST" action="{% url 'login' %}">
                     {% csrf_token %}
 					<span class="login100-form-title">
