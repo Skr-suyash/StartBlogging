@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+{% load static %}
+<head>
+	<title>Create New Post</title>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+	<link href="https://fonts.googleapis.com/css2?family=Libre+Baskerville&display=swap" rel="stylesheet">
+
+	<link rel="stylesheet" type="text/css" href="{% static 'css/create_blog.css' %}">
+
+</head>
+
+<body>
+
+	
+	<!--		 NAVBAR 		  -->
+	<nav class="navbar navbar-expand-lg navbar-light bg-light" style="padding-left: 150px; padding-right: 150px;">
+		<a class="navbar-brand" href="#">
+			<img src="{% static 'images/bold.png' %}" width="30" height="30" class="d-inline-block align-top" alt="">
+		  </a>
+		  <ul class="navbar-nav">
+			<li class="nav-item active">
+			  <span class="nav-link"> Draft </span>
+			</li>
+		  </ul>
+
+		  <ul class="navbar-nav ml-auto">
+			<li class="nav-item active">
+			  <button class="btn btn-success publishbutton">Publish</button>
+			</li>
+			<li class="nav-item dropdown">
+				<a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+					<span class="fa fa-ellipsis-h" aria-hidden="true"></span>
+				</a>
+				<div class="dropdown-menu" aria-labelledby="navbarDropdown">
+				  <a class="dropdown-item" href="#">Action</a>
+				  <a class="dropdown-item" href="#">Another action</a>
+				  <div class="dropdown-divider"></div>
+				  <a class="dropdown-item" href="#">Something else here</a>
+				</div>
+			  </li>
+
+			  <li class="nav-item dropdown" style="list-style-type: none;">
+				<a class="navbar-brand fa fa-user-circle" href="#" id="navbarDropdownMenuLink" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="font-size: xx-large;">
+				</a>
+				<div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+				  <a class="dropdown-item" href="{% url 'logout' %}">Sign Out</a>
+				</div>
+			  </li>
+		</div>
+	  </nav>
+	  <!-------#################----------->
+
+	  <div class="blog container" >
+		  <p contenteditable="True" class="text title" id="title">Enter title...</p>
+		  <p contenteditable="True" class="text body" id="body">Write your story...</p>
+	  </div>
+
+	
+<!--===============================================================================================-->	
+    <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
+<!--===============================================================================================-->
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+<!--===============================================================================================-->
+    <script src="{% static 'js/validate.js' %}"></script>
+<!--===============================================================================================-->
+
+<script>
+  const onPastePlainText = (e) => {
+  var pastedText = undefined;
+  if (window.clipboardData && window.clipboardData.getData) { // IE
+    pastedText = window.clipboardData.getData('Text');
+  } else if (e.clipboardData && e.clipboardData.getData) {
+    pastedText = e.clipboardData.getData('text/plain');
+  }
+  e.target.textContent = pastedText;
+  e.preventDefault();
+  return false;
+}
+
+document.getElementById('body').addEventListener('paste', onPastePlainText);
+document.getElementById('title').addEventListener('paste', onPastePlainText);
+
+</script>
+	
+</body>
+</html>

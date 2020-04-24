@@ -1,0 +1,32 @@
+body {
+    background-color: rgb(224, 220, 220);
+}
+
+button .publishbutton {
+    max-height: 20px;
+}
+
+li {
+    padding-left: 10px;
+    padding-right: 10px;
+}
+
+.blog {
+    margin-top: 50px;
+    margin-bottom: 50px;
+}
+
+.text {
+    outline: none;
+}
+
+.text.title{
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    font-size: 3em;
+    font-weight: 500;
+}
+
+.text.body {
+    font-size: large;
+    font-family: 'Libre Baskerville', sans-serif;
+}

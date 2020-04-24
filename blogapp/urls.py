@@ -17,9 +17,11 @@ from django.contrib import admin
 from django.urls import path, include
 import allblogs.views
 import accounts
+import create_blog
  
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', allblogs.views.home, name='home'),
     path('accounts/', include('accounts.urls')),    
+    path('create_blog', include('create_blog.urls'))
 ]
