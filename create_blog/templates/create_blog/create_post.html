@@ -12,8 +12,12 @@
 
 	<link href="https://fonts.googleapis.com/css2?family=Libre+Baskerville&display=swap" rel="stylesheet">
 
-	<link rel="stylesheet" type="text/css" href="{% static 'css/create_blog.css' %}">
+	<script src="//cdn.jsdelivr.net/npm/medium-editor@latest/dist/js/medium-editor.js"></script>
+	<link rel="stylesheet" href="//cdn.jsdelivr.net/npm/medium-editor@latest/dist/css/medium-editor.min.css" type="text/css" media="screen" charset="utf-8">
+	<link rel="stylesheet" href="{% static 'css/medium-editor.css' %}" type="text/css">
 
+	<link rel="stylesheet" type="text/css" href="{% static 'css/create_blog.css' %}">
+	
 </head>
 
 <body>
@@ -32,7 +36,7 @@
 
 		  <ul class="navbar-nav ml-auto">
 			<li class="nav-item active">
-			  <button class="btn btn-success publishbutton">Publish</button>
+			  <button class="btn btn-success publishbutton" onclick="submit()">Publish</button>
 			</li>
 			<li class="nav-item dropdown">
 				<a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -57,12 +61,18 @@
 	  </nav>
 	  <!-------#################----------->
 
-	  <div class="blog container" >
-		  <p contenteditable="True" class="text title" id="title">Enter title...</p>
-		  <p contenteditable="True" class="text body" id="body">Write your story...</p>
+
+	  <form id="hidden_form" method="POST" action="{% url 'create_post' %}">
+		  <input class="hidden_title" type="hidden">
+		  <input class="hidden_body" type="hidden">
+	  </form>
+
+	  <div class="blog container">
+		<div class="editable_title text title" id="title"></div>
+		<div class="editable_body text body" id="body"></div>
+		<script src="{% static 'js/create_post.js' %}"></script>
 	  </div>
 
-	
 <!--===============================================================================================-->	
     <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
 <!--===============================================================================================-->
@@ -71,23 +81,5 @@
     <script src="{% static 'js/validate.js' %}"></script>
 <!--===============================================================================================-->
 
-<script>
-  const onPastePlainText = (e) => {
-  var pastedText = undefined;
-  if (window.clipboardData && window.clipboardData.getData) { // IE
-    pastedText = window.clipboardData.getData('Text');
-  } else if (e.clipboardData && e.clipboardData.getData) {
-    pastedText = e.clipboardData.getData('text/plain');
-  }
-  e.target.textContent = pastedText;
-  e.preventDefault();
-  return false;
-}
-
-document.getElementById('body').addEventListener('paste', onPastePlainText);
-document.getElementById('title').addEventListener('paste', onPastePlainText);
-
-</script>
-	
 </body>
 </html>
