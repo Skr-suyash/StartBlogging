@@ -63,8 +63,9 @@
 
 
 	  <form id="hidden_form" method="POST" action="{% url 'create_post' %}">
-		  <input class="hidden_title" type="hidden">
-		  <input class="hidden_body" type="hidden">
+		  {% csrf_token %}
+		  <input id="hidden_title" type="hidden" name="title">
+		  <input id="hidden_body" type="hidden" name="body">
 	  </form>
 
 	  <div class="blog container">

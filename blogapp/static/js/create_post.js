@@ -24,8 +24,8 @@ title = document.getElementById('title').innerText
 body  = document.getElementById('body').innerHTML
 
 if (title != "" && body != "") {
-        document.getElementsByClassName('hidden_title').value = title
-        document.getElementsByClassName('hidden_body').value = body
+        document.getElementById('hidden_title').value = title
+        document.getElementById('hidden_body').value = body
         document.getElementById('hidden_form').submit()
         console.log('Submitted')
     }

@@ -16,7 +16,7 @@ class Blog(models.Model):
         return self.title
 
     def publish(self):
-        self.published_date = timezone.now
+        self.published_date = timezone.now().date()
         self.save()
 
     def approved_comments(self):
