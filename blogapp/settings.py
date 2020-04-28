@@ -34,6 +34,7 @@ INSTALLED_APPS = [
     'allblogs',
     'accounts',
     'create_blog',
+    'post_detail',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -57,7 +58,7 @@ ROOT_URLCONF = 'blogapp.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': ['templates'],
+        'DIRS': ['blogapp/templates'],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [

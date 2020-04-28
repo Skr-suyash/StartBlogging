@@ -12,6 +12,9 @@ var editor = new MediumEditor('.editable_body', {
     placeholder: {
         text: 'Type your text...',
         hideOnClick: true
+    },
+    anchor: {
+        linkValidation: true,
     }
 });
 
