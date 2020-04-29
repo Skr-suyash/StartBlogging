@@ -20,7 +20,7 @@
 	
 </head>
 
-<body>
+<body style="background-color: white;">
 
 	
 	<!--		 NAVBAR 		  -->
@@ -70,8 +70,18 @@
 		  <input id="hidden_body" type="hidden" name="body">
 	  </form>
 
+	  <style>
+		blockquote {
+		  margin-left: 20px;
+		  border-left: 4px solid brown;
+		  padding-left: 30px;
+		  display: block;
+		  color: gray;
+		}
+	  </style>
+
 	  <div class="blog container">
-		<div class="editable_title text title" id="title"></div>
+		<div class="editable_title text title" id="title" style="margin-bottom: 1em;"></div>
 		<div class="editable_body text body" id="body"></div>
 		<script src="{% static 'js/create_post.js' %}"></script>
 	  </div>
