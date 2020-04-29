@@ -7,16 +7,17 @@ from django.shortcuts import reverse
 class Blog(models.Model):
 
     author = models.ForeignKey(to=User, on_delete=models.CASCADE)
-    title = models.CharField(max_length=255)
+    title = models.CharField(max_length=200)
+    description = models.CharField(max_length=255, blank=True, null=True)
     body = models.TextField()
-    date_created = models.DateField(default=timezone.now)
-    published_date = models.DateField(blank=True, null=True)
+    date_created = models.DateTimeField(default=timezone.now)
+    published_date = models.DateTimeField(blank=True, null=True)
 
     def __str__(self):
         return self.title
 
     def publish(self):
-        self.published_date = timezone.now().date()
+        self.published_date = timezone.now()
         self.save()
 
     def approved_comments(self):

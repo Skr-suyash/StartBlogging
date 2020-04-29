@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 {% load static %}
+{% load tz %}
 <html lang="en">
 
 <head>
@@ -101,13 +102,15 @@
             <h2 class="post-title">
               {{post.title}}
             </h2>
+            {% if post.description != None %}
             <h3 class="post-subtitle">
-              Problems look mighty small from 150 miles up
+              {{post.description}}
             </h3>
+            {% endif %}
           </a>
           <p class="post-meta">Posted by
             <a href="#">{{post.author}}</a>
-            on {{post.published_date}}</p>
+            on {{post.published_date | localtime}}</p>
         </div>
         <hr>
         {% endfor %}

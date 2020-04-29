@@ -67,6 +67,7 @@
 	  <form id="hidden_form" method="POST" action="{% url 'create_post' %}">
 		  {% csrf_token %}
 		  <input id="hidden_title" type="hidden" name="title">
+		  <input id="hidden_description" type="hidden" name="description">
 		  <input id="hidden_body" type="hidden" name="body">
 	  </form>
 
@@ -82,7 +83,12 @@
 
 	  <div class="blog container">
 		<div class="editable_title text title" id="title" style="margin-bottom: 1em;"></div>
+		<div class="editable_description text body" id="description" style="margin-bottom: 1em;"></div>
 		<div class="editable_body text body" id="body"></div>
+
+		<script>
+		</script>
+
 		<script src="{% static 'js/create_post.js' %}"></script>
 	  </div>
 

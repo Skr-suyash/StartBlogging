@@ -8,6 +8,7 @@ def create_post(request):
         post = Blog()
         post.author = request.user
         post.title = request.POST['title']
+        post.description = request.POST['description']
         post.body = request.POST['body']
         post.publish()
 
