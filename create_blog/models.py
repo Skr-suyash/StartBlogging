@@ -2,10 +2,14 @@ from django.db import models
 from django.contrib.auth.models import User
 from django.utils import timezone
 from django.shortcuts import reverse
+from django.utils.text import slugify
+from django.db.models.signals import pre_save
+
 
 # Create your models here.
 class Blog(models.Model):
 
+    slug = models.SlugField(unique=True, max_length=255)
     author = models.ForeignKey(to=User, on_delete=models.CASCADE)
     title = models.CharField(max_length=200)
     description = models.CharField(max_length=255, blank=True, null=True)
@@ -24,8 +28,25 @@ class Blog(models.Model):
         return self.comments.filter(approved_comment=False)
     
     def get_absolute_url(self):
-        return reverse("post_detail", kwargs={"pk": self.pk})
+        return reverse("post_detail", kwargs={"slug": self.slug})
+
+def create_slug(instance, new_slug=None):
+    slug = slugify(instance.title)
+    if new_slug is not None:
+        slug = new_slug
+    qs = Blog.objects.filter(slug=slug).order_by('-id')
+    exists = qs.exists()
+    if exists:
+        new_slug = "%s-%s" %(slug, qs.first().id)
+        return create_slug(instance, new_slug=new_slug)
+    return slug
+
     
+def pre_save_post_receiver(sender, instance, *args, **kwargs):
+    if not instance.slug:
+        instance.slug = create_slug(instance)
+
+pre_save.connect(pre_save_post_receiver, sender=Blog)
 
 class Comment(models.Model):
 
