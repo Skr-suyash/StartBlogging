@@ -38,7 +38,10 @@
 
 		  <ul class="navbar-nav ml-auto">
 			<li class="nav-item active">
-			  <button class="btn btn-success publishbutton" onclick="submit()">Publish</button>
+				<button class="btn btn-primary saveButton" onclick="save()"><span class="fa fa-save" style="font-size: larger;" ></span></button>
+			  </li>
+			<li class="nav-item active">
+			  <button class="btn btn-success publishbutton" onclick="publish()">Publish</button>
 			</li>
 			<li class="nav-item dropdown">
 				<a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -56,6 +59,7 @@
 				<a class="navbar-brand fa fa-user-circle" href="#" id="navbarDropdownMenuLink" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="font-size: xx-large;">
 				</a>
 				<div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+					<a class="dropdown-item" href="{% url 'drafts' request.user %}">Drafts</a>
 				  <a class="dropdown-item" href="{% url 'logout' %}">Sign Out</a>
 				</div>
 			  </li>
@@ -66,6 +70,7 @@
 
 	  <form id="hidden_form" method="POST" action="{% url 'create_post' %}">
 		  {% csrf_token %}
+		  <input id="is_draft" type="hidden" name="is_draft">
 		  <input id="hidden_title" type="hidden" name="title">
 		  <input id="hidden_description" type="hidden" name="description">
 		  <input id="hidden_body" type="hidden" name="body">

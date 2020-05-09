@@ -1,10 +1,27 @@
-from django.shortcuts import render
+from django.shortcuts import render, get_object_or_404
+from django.db.models import F
 from create_blog.models import Blog
 from django.utils import timezone
 
 
 def home(request):
     
-    posts = Blog.objects.filter(published_date__lte=timezone.now()).order_by('-published_date')
+    posts = Blog.objects.filter(is_draft=False).filter(published_date__lte=timezone.now()).order_by('-published_date')
 
     return render(request, 'allblogs/home.html', {'posts': posts})
+
+
+def drafts(request, author):
+
+    drafts = Blog.objects.filter(author__id=request.user.id).filter(is_draft=True).filter(date_created__lte=timezone.now()).order_by('-date_created')
+
+    print("User is : " + str(type(request.user)))
+
+    return render(request, 'allblogs/drafts.html', {'drafts': drafts})
+
+
+def myposts(request, author):
+
+    myposts = Blog.objects.filter(author__id=request.user.id).filter(is_draft=False).filter(published_date__lte=timezone.now()).order_by('-published_date')
+
+    return render(request, 'allblogs/myposts.html', {'myposts': myposts})

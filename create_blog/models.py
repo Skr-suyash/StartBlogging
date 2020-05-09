@@ -10,17 +10,19 @@ from django.db.models.signals import pre_save
 class Blog(models.Model):
 
     slug = models.SlugField(unique=True, max_length=255)
-    author = models.ForeignKey(to=User, on_delete=models.CASCADE)
+    author = models.ForeignKey(to=User, on_delete=models.CASCADE, related_name='author')
     title = models.CharField(max_length=200)
     description = models.CharField(max_length=255, blank=True, null=True)
     body = models.TextField()
     date_created = models.DateTimeField(default=timezone.now)
+    is_draft = models.BooleanField(default=True)
     published_date = models.DateTimeField(blank=True, null=True)
 
     def __str__(self):
         return self.title
 
     def publish(self):
+        self.is_draft = False
         self.published_date = timezone.now()
         self.save()
 

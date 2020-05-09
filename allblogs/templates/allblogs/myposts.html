@@ -1,0 +1,55 @@
+{% extends 'blogapp/base.html' %}
+
+{% load static %}
+{% load tz %}
+
+{% block custom_fonts %}
+
+{% endblock %}
+
+{% block custom_stylesheet %}
+    <link href="{% static 'css/base.css' %}" rel="stylesheet">
+{% endblock %}
+
+{% block body %}
+
+<div class="container" style="padding-top: 80px;">
+    <div class="row">
+        <h4 style="margin-left: 10px">My Posts</h4>
+      <div class="col-lg-8 col-md-10 mx-auto" style="margin-top: 20px;">
+        {% for post in myposts.all %}
+        <div class="post-preview">
+          <a href="{{post.get_absolute_url}}">
+            <h2 class="post-title">
+              {{post.title}}
+            </h2>
+            {% if post.description != None %}
+            <h3 class="post-subtitle">
+              {{post.description}}
+            </h3>
+            {% endif %}
+          </a>
+          <p class="post-meta">Posted by
+            <a href="#">{{post.author}}</a>
+            on {{post.published_date | localtime}}</p>
+        </div>
+        <hr>
+        {% endfor %}
+        
+        <!-- Pager -->
+        <div class="clearfix">
+          <a class="btn btn-primary float-right" href="#" style="padding: 15px 25px;">Older Posts &rarr;</a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <hr>
+
+  
+{% endblock %}
+
+{% block custom_scripts %}
+      
+{% endblock %}
+    

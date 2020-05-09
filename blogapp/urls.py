@@ -23,7 +23,9 @@ import post_detail
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', allblogs.views.home, name='home'),
-    path('accounts/', include('accounts.urls')),    
+    path('<str:author>/drafts', allblogs.views.drafts, name='drafts'),
+    path('<str:author>/myposts', allblogs.views.myposts, name='myposts'),
+    path('/accounts/', include('accounts.urls')),    
     path('create_blog', include('create_blog.urls')),
     path(r'post_detail/', include('post_detail.urls')),
 

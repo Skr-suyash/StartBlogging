@@ -1,0 +1,55 @@
+{% extends 'blogapp/base.html' %}
+
+{% load static %}
+{% load tz %}
+
+{% block custom_fonts %}
+
+{% endblock %}
+
+{% block custom_stylesheet %}
+    <link href="{% static 'css/base.css' %}" rel="stylesheet">
+{% endblock %}
+
+{% block body %}
+
+<div class="container" style="padding-top: 80px;">
+    <div class="row">
+        <h4 style="margin-left: 10px; margin-bottom: 20px;">Drafts</h4>
+      <div class="col-lg-8 col-md-10 mx-auto">
+        {% for draft in drafts.all %}
+        <div class="post-preview">
+          <a href="{{draft.get_absolute_url}}">
+            <h2 class="post-title">
+              {{draft.title}}
+            </h2>
+            {% if draft.description != None %}
+            <h3 class="post-subtitle">
+              {{draft.description}}
+            </h3>
+            {% endif %}
+          </a>
+          <p class="post-meta">Created by
+            <a href="#">{{draft.author}}</a>
+            on {{draft.date_created | localtime}}</p>
+        </div>
+        <hr>
+        {% endfor %}
+        
+        <!-- Pager -->
+        <div class="clearfix">
+          <a class="btn btn-primary float-right" href="#" style="padding: 15px 25px;">Older Posts &rarr;</a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <hr>
+
+  
+{% endblock %}
+
+{% block custom_scripts %}
+      
+{% endblock %}
+    
