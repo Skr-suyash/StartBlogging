@@ -33,6 +33,7 @@
             <a href="#">{{post.author}}</a>
             on {{post.published_date | localtime}}</p>
         </div>
+        <a href="/create_blog/edit/{{post.slug}}">(Edit)</a>
         <hr>
         {% endfor %}
         

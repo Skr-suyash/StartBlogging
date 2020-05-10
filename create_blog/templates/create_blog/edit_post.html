@@ -32,14 +32,11 @@
 		</a>
 		  <ul class="navbar-nav">
 			<li class="nav-item active">
-			  <span class="nav-link"> Draft </span>
+			  <span class="nav-link"> Editing... </span>
 			</li>
 		  </ul>
 
 		  <ul class="navbar-nav ml-auto">
-			<li class="nav-item active">
-				<button class="btn btn-primary saveButton" onclick="save()"><span class="fa fa-save" style="font-size: larger;" ></span></button>
-			  </li>
 			<li class="nav-item active">
 			  <button class="btn btn-success publishbutton" onclick="publish()">Publish</button>
 			</li>
@@ -67,14 +64,14 @@
 	  </nav>
 	  <!-------#################----------->
 
-
-	  <form id="hidden_form" method="POST" action="{% url 'create_post' %}">
+	  <form id="hidden_form" method="POST" action="{% url 'edit_post' post.slug %}">
 		  {% csrf_token %}
 		  <input id="is_draft" type="hidden" name="is_draft">
 		  <input id="hidden_title" type="hidden" name="title">
 		  <input id="hidden_description" type="hidden" name="description">
 		  <input id="hidden_body" type="hidden" name="body">
 	  </form>
+
 
 	  <style>
 		blockquote {
@@ -87,9 +84,12 @@
 	  </style>
 
 	  <div class="blog container">
-		<div class="editable_title text title" id="title" style="margin-bottom: 1em;"></div>
-		<div class="editable_description text body" id="description" style="margin-bottom: 1em;"></div>
-		<div class="editable_body text body" id="body"></div>
+		<div class="editable_title text title" id="title" style="margin-bottom: 1em;">{{post.title}}</div>
+		<div class="editable_description text body" id="description" style="margin-bottom: 1em;">{{post.description}}</div>
+		<div class="editable_body text body" id="body">{{post.body | safe}}</div>
+
+		<script>
+		</script>
 
 		<script src="{% static 'js/create_post.js' %}"></script>
 	  </div>
