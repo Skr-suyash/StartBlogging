@@ -8,7 +8,7 @@
 {% endblock %}
 
 {% block custom_stylesheet %}
-    <link href="{% static 'css/home.css' %}" rel="stylesheet">
+    <link href="{% static 'css/base.css' %}" rel="stylesheet">
 {% endblock %}
 
 {% block body %}
@@ -22,9 +22,15 @@
           <div class="post-heading">
             <h1>{{post.title}}</h1>
             <h2 class="subheading">{{post.description | safe}}</h2>
-            <span class="meta">Posted by
-              <a href="#">{{post.author}}</a>
-              on {{post.published_date}}</span>
+            {% if post.is_draft == False %}
+              <span class="meta">Posted by
+                <a href="#">{{post.author}}</a>
+                on {{post.published_date}}</span>
+            {% else %}
+              <span class="meta">Created by
+                <a href="#">{{post.author}}</a>
+                on {{post.date_created}}</span>
+            {% endif %}
           </div>
         </div>
       </div>

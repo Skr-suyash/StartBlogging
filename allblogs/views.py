@@ -1,5 +1,5 @@
 from django.shortcuts import render, get_object_or_404
-from django.db.models import F
+from django.core.paginator import Paginator
 from create_blog.models import Blog
 from django.utils import timezone
 
@@ -7,8 +7,11 @@ from django.utils import timezone
 def home(request):
     
     posts = Blog.objects.filter(is_draft=False).filter(published_date__lte=timezone.now()).order_by('-published_date')
+    paginator = Paginator(posts, 4)
+    page_number = request.GET.get('page')
+    page_obj = paginator.get_page(page_number)
 
-    return render(request, 'allblogs/home.html', {'posts': posts})
+    return render(request, 'allblogs/home.html', {'page_obj': page_obj})
 
 
 def drafts(request, author):

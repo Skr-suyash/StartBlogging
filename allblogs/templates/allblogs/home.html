@@ -98,8 +98,8 @@
   <div class="container">
     <div class="row">
       <div class="col-lg-8 col-md-10 mx-auto">
-        {% for post in posts.all %}
-        <div class="post-preview">
+        {% for post in page_obj %}
+        <div class="post-preview" id="preview">
           <a href="{{post.get_absolute_url}}">
             <h2 class="post-title">
               {{post.title}}
@@ -116,14 +116,21 @@
         </div>
         <hr>
         {% endfor %}
+        <div id="preview"></div>
         
-        <!-- Pager -->
-        <div class="clearfix">
-          <a class="btn btn-primary float-right" href="#" style="padding: 15px 25px;">Older Posts &rarr;</a>
-        </div>
-      </div>
-    </div>
-  </div>
+<div class="clearfix">
+      {% if page_obj.has_previous %}
+            <a class="btn btn-primary float-left" href="?page={{ page_obj.previous_page_number }} #preview">&larr; Newer posts</a>
+      {% endif %}
+
+      <!-- <span class="current">
+          Page {{ page_obj.number }} of {{ page_obj.paginator.num_pages }}.
+      </span> -->
+
+      {% if page_obj.has_next %}
+        <a class="btn btn-primary btn float-right" href="?page={{ page_obj.next_page_number }} #preview">Older Posts &rarr;</a>
+      {% endif %}
+</div>
 
   <hr>
 
