@@ -25,8 +25,9 @@ urlpatterns = [
     path('', allblogs.views.home, name='home'),
     path('<str:author>/drafts', allblogs.views.drafts, name='drafts'),
     path('<str:author>/myposts', allblogs.views.myposts, name='myposts'),
+    path('<str:author>/myposts/<slug:slug>/delete', allblogs.views.delete, name='delete'),
     path('/accounts/', include('accounts.urls')),    
     path('create_blog/', include('create_blog.urls')),
-    path(r'post_detail/', include('post_detail.urls')),
+    path('post_detail/', include('post_detail.urls')),
 
 ]

@@ -31,6 +31,13 @@
                 <a href="#">{{post.author}}</a>
                 on {{post.date_created}}</span>
             {% endif %}
+
+            {% if post.is_draft %}
+            <div class="col-12" style="margin-top: 20px;">
+              <a href= "{% url 'publish_draft' slug=post.slug %}" class="btn btn-primary float-right" style="font-size: large;">Publish</a>
+            </div>
+            {% endif %}
+
           </div>
         </div>
       </div>

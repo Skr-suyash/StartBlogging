@@ -32,7 +32,7 @@ def create_post(request):
     else: 
         return render(request, 'create_blog/create_post.html')
 
-
+@login_required
 def edit_post(request, slug):
 
     post = get_object_or_404(Blog, slug=slug)
@@ -45,3 +45,11 @@ def edit_post(request, slug):
         return redirect(post.get_absolute_url())
     else:
         return render(request, 'create_blog/edit_post.html', {'post': post})
+
+@login_required
+def publish_draft(request, slug):
+
+    post = get_object_or_404(Blog, slug=slug)
+    post.publish()
+    return redirect('home')
+
