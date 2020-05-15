@@ -11,10 +11,9 @@
 	<link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 
 	<link href="https://fonts.googleapis.com/css2?family=Libre+Baskerville&display=swap" rel="stylesheet">
-
-	<script src="//cdn.jsdelivr.net/npm/medium-editor@latest/dist/js/medium-editor.js"></script>
-	<link rel="stylesheet" href="//cdn.jsdelivr.net/npm/medium-editor@latest/dist/css/medium-editor.min.css" type="text/css" media="screen" charset="utf-8">
-	<link rel="stylesheet" href="{% static 'css/medium-editor.css' %}" type="text/css">
+	
+	<link href="https://cdn.quilljs.com/1.3.6/quill.snow.css" rel="stylesheet">
+	<script src="https://cdn.quilljs.com/1.3.6/quill.js"></script>
 
 	<link rel="stylesheet" type="text/css" href="{% static 'css/create_blog.css' %}">
 	
@@ -73,27 +72,27 @@
 	  </form>
 
 
-	  <style>
-		blockquote {
-		  margin-left: 20px;
-		  border-left: 4px solid brown;
-		  padding-left: 30px;
-		  display: block;
-		  color: gray;
-		}
-	  </style>
-
 	  <div class="blog container">
-		<div class="editable_title text title" id="title" style="margin-bottom: 1em;">{{post.title}}</div>
-		<div class="editable_description text body" id="description" style="margin-bottom: 1em;">{{post.description}}</div>
-		<div class="editable_body text body" id="body">{{post.body | safe}}</div>
-
-		<script>
-		</script>
+		<div class="text title" id="title" style="border: 0;">{{post.title}}</div>
+		<div class="text body" id="description" style="margin-bottom: 2em; border: 0;">{{post.description}}</div>
+		<div class="text body" id="body" style="min-height: 200px;">{{post.body | safe}}</div>
 
 		<script src="{% static 'js/create_post.js' %}"></script>
 	  </div>
 
+	  
+	  <style>
+		blockquote {
+		  margin-left: 20px;
+		  border-left: 4px solid brown !important;
+		  padding-left: 30px;
+		  display: block;
+		  color: gray;
+		}
+		.ql-editor {
+    		line-height: 2;
+		}
+	  </style>
 <!--===============================================================================================-->	
     <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
 <!--===============================================================================================-->

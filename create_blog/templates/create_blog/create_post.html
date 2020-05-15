@@ -12,9 +12,8 @@
 
 	<link href="https://fonts.googleapis.com/css2?family=Libre+Baskerville&display=swap" rel="stylesheet">
 
-	<script src="//cdn.jsdelivr.net/npm/medium-editor@latest/dist/js/medium-editor.js"></script>
-	<link rel="stylesheet" href="//cdn.jsdelivr.net/npm/medium-editor@latest/dist/css/medium-editor.min.css" type="text/css" media="screen" charset="utf-8">
-	<link rel="stylesheet" href="{% static 'css/medium-editor.css' %}" type="text/css">
+	<link href="https://cdn.quilljs.com/1.3.6/quill.snow.css" rel="stylesheet">
+	<script src="https://cdn.quilljs.com/1.3.6/quill.js"></script>
 
 	<link rel="stylesheet" type="text/css" href="{% static 'css/create_blog.css' %}">
 	
@@ -76,23 +75,28 @@
 		  <input id="hidden_body" type="hidden" name="body">
 	  </form>
 
+	  <div class="blog container">
+		<div class="text title" id="title" style="border: 0;"></div>
+		<div class="text body" id="description" style="margin-bottom: 2em; border: 0;"></div>
+		<div class="text body" id="body" style="min-height: 200px;"></div>
+
+		<script src="{% static 'js/create_post.js' %}"></script>
+	  </div>
+
+	  
 	  <style>
 		blockquote {
 		  margin-left: 20px;
-		  border-left: 4px solid brown;
+		  border-left: 4px solid brown !important;
 		  padding-left: 30px;
 		  display: block;
 		  color: gray;
 		}
+		.ql-editor {
+    		line-height: 2;
+		}
 	  </style>
 
-	  <div class="blog container">
-		<div class="editable_title text title" id="title" style="margin-bottom: 1em;"></div>
-		<div class="editable_description text body" id="description" style="margin-bottom: 1em;"></div>
-		<div class="editable_body text body" id="body"></div>
-
-		<script src="{% static 'js/create_post.js' %}"></script>
-	  </div>
 
 <!--===============================================================================================-->	
     <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>

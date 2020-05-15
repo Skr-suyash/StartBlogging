@@ -28,6 +28,7 @@ urlpatterns = [
     path('<str:author>/myposts/<slug:slug>/delete', allblogs.views.delete, name='delete'),
     path('/accounts/', include('accounts.urls')),    
     path('create_blog/', include('create_blog.urls')),
+    path('<slug:slug>/comments', allblogs.views.comments, name='comments'),
     path('post_detail/', include('post_detail.urls')),
 
 ]

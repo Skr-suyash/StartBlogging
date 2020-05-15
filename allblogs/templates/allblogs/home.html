@@ -68,6 +68,7 @@
         <a class="navbar-brand dropdown-toggle fa fa-user-circle" href="#" id="navbarDropdownMenuLink" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="font-size: larger;">
         </a>
         <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+          <a class="dropdown-item" href="#" style="text-align: center;"><span style="float: left; text-align: center;" class="fa fa-user-circle"></span>{{request.user}}</a>
           <a class="dropdown-item" href="{% url 'myposts' request.user %}">My Posts</a>
           <a class="dropdown-item" href="{% url 'drafts' request.user %}">Drafts</a>
           <a class="dropdown-item" href="{% url 'logout' %}">Sign Out</a>
@@ -106,7 +107,7 @@
             </h2>
             {% if post.description != None %}
             <h3 class="post-subtitle">
-              {{post.description}}
+              {{post.description | truncatewords:25}}
             </h3>
             {% endif %}
           </a>

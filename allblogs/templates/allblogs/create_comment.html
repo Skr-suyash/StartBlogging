@@ -1,0 +1,52 @@
+{% extends 'blogapp/base.html' %}
+{% load static %}
+            
+
+{% block title %} Comments {% endblock %}
+
+{% block custom_stylesheet %}
+    <link href="{% static 'css/base.css' %}" rel="stylesheet">
+    <link href="{% static 'css/comments.css' %}" rel="stylesheet">
+    <link rel="stylesheet" href="{% static 'css/medium-editor.css' %}" type="text/css">
+
+{% endblock %}
+
+{% block body %}
+
+        <div class="container-fluid" style="background-color: white; margin-top: 100px;">
+    <div class="row">
+    <div class="col-lg-7 col-md-9 col-sm-12 col-centered">
+    <div class="card" style="margin-bottom: 20px">
+        <div class="card-header">
+        Write a comment
+        </div>
+            <div class="card-body editablecomment" id="comment" style="margin-bottom: 1em;"></div>
+            <script src="{% static 'js/create_comment.js' %}"></script>
+    <a href="#" class="btn btn-success btnpost" style="text-align: center; padding: 5px;">Post <i class="fa fa-comments"></i></a>
+    </div>
+    </div>
+        </div>
+    </div>
+
+    <div class="container-fluid" style="background-color: #FBFBFB">
+    <div class="row">
+        <div class="col-lg-7 col-md-9 col-sm-12 col-centered">
+    <div class="card" style="margin-top: 20px;">
+    <h5 class="card-title"><span class="fa fa-user usericon"></span>Suyash</h5>
+    <h6 class="card-subtitle mb-2 text-muted">20 February 2020</h6>
+        <div class="card-body">
+        Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem <br><a href="readmore">Read more...</a>
+        </div>
+
+    </div>
+    </div>
+    </div>
+    </div>
+        
+      
+{% endblock %}
+
+
+{% block custom_scripts %}
+
+{% endblock %}

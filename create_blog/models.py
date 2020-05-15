@@ -56,14 +56,9 @@ class Comment(models.Model):
     author = models.ForeignKey(to=User, on_delete=models.CASCADE)
     body = models.TextField()
     date_created = models.DateTimeField(auto_now_add=True)
-    approved_comment = models.BooleanField(default=False)
 
     def __str__(self):
         return self.body
-
-    def approve(self):
-        self.approved_comment = True
-        self.save()
 
     def get_absolute_url(self):
         return reverse("comment_list")

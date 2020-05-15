@@ -54,6 +54,9 @@
       display: block;
       color: gray;
     }
+    p{
+      margin: 5px;
+    }
   </style>
 
   <article>
@@ -63,6 +66,10 @@
 
         {{post.body | safe}}
         
+        {% if post.is_draft == False %}
+        <button type="button" class="btn btn-block btn-outline-success" style="border-radius: 5px;">Write a comment <i class="fa fa-comments"></i></button>
+        {% endif %}
+
         </div>
       </div>
     </div>
