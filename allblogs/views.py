@@ -35,3 +35,12 @@ def delete(request, author, slug):
     post_to_be_deleted = get_object_or_404(Blog,slug=slug)
     post_to_be_deleted.delete()
     return redirect('home')
+
+
+### For Comments
+
+def comments(request, slug):
+
+    
+
+    return render(request, 'allblogs/create_comment.html')
