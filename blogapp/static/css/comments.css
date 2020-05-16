@@ -1,34 +1,31 @@
-body {
-    overflow: hidden;
-}
-
-.card-body{
+  .card-body {
     padding: 10px;
-}
+  }
 
-.card-title, .card-subtitle {
-    padding: 8px
-}
+  .card-title,
+  .card-subtitle {
+    padding: 8px;
+  }
 
-.col-centered {
+  .col-centered {
     margin: 0 auto;
-}
+  }
 
-.card {
-    box-shadow: 0 1px 4px rgba(0,0,0,.04);
-    border: 1px solid rgba(0,0,a0,.09);
+  .card {
+    box-shadow: 0 1px 4px rgba(0, 0, 0, 0.04);
+    border: 1px solid rgba(0, 0, a0, 0.09);
     margin: 10px;
-    padding: 10px
-}
+    padding: 10px;
+  }
 
-.usericon {
+  .usericon {
     margin-right: 10px;
-}
+  }
 
-.btn.btn-success.btnpost {
+  .btn.btn-success.btnpost {
     margin-left: auto;
     margin-top: 5px;
     margin-bottom: 5px;
     margin-right: 5px;
     text-align: center;
-}
+  }

@@ -1,52 +1,124 @@
 {% extends 'blogapp/base.html' %}
-{% load static %}
-            
-
-{% block title %} Comments {% endblock %}
+{% load static %} 
+{% block custom_fonts %} {% endblock %} 
 
 {% block custom_stylesheet %}
-    <link href="{% static 'css/base.css' %}" rel="stylesheet">
-    <link href="{% static 'css/comments.css' %}" rel="stylesheet">
-    <link rel="stylesheet" href="{% static 'css/medium-editor.css' %}" type="text/css">
+<link href="{% static 'css/base.css' %}" rel="stylesheet" />
 
-{% endblock %}
+{% endblock %} 
 
 {% block body %}
+<style>
+  .card-body {
+    padding: 10px;
+  }
 
-        <div class="container-fluid" style="background-color: white; margin-top: 100px;">
-    <div class="row">
+  .card-title,
+  .card-subtitle {
+    padding: 8px;
+  }
+
+  .col-centered {
+    margin: 0 auto;
+  }
+
+  .card {
+    box-shadow: 0 1px 4px rgba(0, 0, 0, 0.04);
+    border: 1px solid rgba(0, 0, a0, 0.09);
+    margin: 10px;
+    padding: 10px;
+  }
+
+  .usericon {
+    margin-right: 10px;
+  }
+
+  .btn.btn-success.btnpost {
+    margin-left: auto;
+    margin-top: 5px;
+    margin-bottom: 5px;
+    margin-right: 5px;
+    text-align: center;
+  }
+
+  [data-placeholder]:empty:before {
+     content: attr(data-placeholder);
+     color: #888;
+     font-style: italic;
+}
+</style>
+<script>
+// Contenteditable Paste Fix
+var ce = document.querySelector('[contenteditable]')
+if (ce) {
+  ce.addEventListener('paste', function (e) {
+    e.preventDefault()
+    var text = e.clipboardData.getData('text/plain')
+    document.execCommand('insertText', false, text)
+})
+}
+</script>
+
+<!-- Write your Comments here -->
+<div class="container-fluid" style="background-color: white; margin-top: 100px;">
+  <div class="row">
     <div class="col-lg-7 col-md-9 col-sm-12 col-centered">
-    <div class="card" style="margin-bottom: 20px">
+      <div class="card" style="margin-bottom: 20px;">
         <div class="card-header">
-        Write a comment
+          Write a comment
         </div>
-            <div class="card-body editablecomment" id="comment" style="margin-bottom: 1em;"></div>
-            <script src="{% static 'js/create_comment.js' %}"></script>
-    <a href="#" class="btn btn-success btnpost" style="text-align: center; padding: 5px;">Post <i class="fa fa-comments"></i></a>
+        <div
+          class="card-body comment"
+          id="comment"
+          style="margin-bottom: 1em;"
+          contenteditable="true"
+          data-placeholder= "Write your Comment..."></div>
+        <a
+          onclick="submit()"
+          class="btn btn-success btnpost"
+          style="text-align: center; padding: 5px; color: white;"
+          >Post <i class="fa fa-comments"></i
+        ></a>
+      </div>
     </div>
-    </div>
+  </div>
+</div>
+
+
+<form id="comment_form" method="POST" action="{% url 'comments' slug=post.slug %}">
+  {% csrf_token %}
+  <input type="hidden" id="submit_comment" name="comment_body">
+</form>
+
+<script>
+  // Handle sending data to server
+  function submit() {
+  let comment = document.getElementById('comment').innerText
+  if (comment != ""){
+    document.getElementById('submit_comment').value = comment
+    document.getElementById('comment_form').submit()
+    console.log(document.getElementById('submit_comment').innerText)
+  } 
+}
+</script>
+    {% for comment in comments %}
+      <div class="container-fluid" style="background-color: #fbfbfb;">
+        <div class="row">
+          <div class="col-lg-7 col-md-9 col-sm-12 col-centered">
+            <div class="card" style="margin-top: 20px;">
+              <h5 class="card-title">
+                <span class="fa fa-user usericon"></span>{{comment.author}}
+              </h5>
+              <h6 class="card-subtitle mb-2 text-muted">{{comment.date_created}}</h6>
+              <div class="card-body">
+                {{comment.body | truncatechars:200}}<br /><a href="readmore">Read more...</a>
+              </div>
+            </div>
+          </div>
         </div>
-    </div>
+      </div>
+      {% endfor %}
 
-    <div class="container-fluid" style="background-color: #FBFBFB">
-    <div class="row">
-        <div class="col-lg-7 col-md-9 col-sm-12 col-centered">
-    <div class="card" style="margin-top: 20px;">
-    <h5 class="card-title"><span class="fa fa-user usericon"></span>Suyash</h5>
-    <h6 class="card-subtitle mb-2 text-muted">20 February 2020</h6>
-        <div class="card-body">
-        Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem <br><a href="readmore">Read more...</a>
-        </div>
+      {% endblock %} 
 
-    </div>
-    </div>
-    </div>
-    </div>
-        
-      
-{% endblock %}
-
-
-{% block custom_scripts %}
-
-{% endblock %}
+{% block custom_scripts %} {% endblock %}

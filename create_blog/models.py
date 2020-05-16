@@ -61,4 +61,7 @@ class Comment(models.Model):
         return self.body
 
     def get_absolute_url(self):
-        return reverse("comment_list")
+        return reverse("comments", kwargs={"slug": self.post.slug})
+
+    class Meta:
+        ordering = ["-date_created"]

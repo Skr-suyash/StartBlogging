@@ -1,6 +1,4 @@
-
-
-
+  
   var quill1 = new Quill('#title', {
     modules: {
       toolbar: false,

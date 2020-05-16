@@ -1,6 +1,6 @@
-from django.shortcuts import render, redirect, get_object_or_404
+from django.shortcuts import render, redirect, get_object_or_404, get_list_or_404
 from django.core.paginator import Paginator
-from create_blog.models import Blog
+from create_blog.models import Blog, Comment
 from django.utils import timezone
 
 
@@ -41,6 +41,19 @@ def delete(request, author, slug):
 
 def comments(request, slug):
 
-    
+    post = get_object_or_404(Blog, slug=slug)
+    comments = get_list_or_404(Comment, post=post)
 
-    return render(request, 'allblogs/create_comment.html')
+    if (request.method == 'POST'):
+        print(request.POST)
+        comment = Comment()
+        comment.post = post
+        comment.author = request.user
+        comment.body = request.POST['comment_body']
+        print(request.POST['comment_body'])
+        comment.date_created = timezone.now()
+        comment.save()
+        return redirect('comments', slug=post.slug)
+    
+    return render(request, 'allblogs/create_comment.html', {'post': post, 'comments':comments})
+
