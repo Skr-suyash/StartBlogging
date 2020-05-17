@@ -5,10 +5,12 @@
 {% block custom_stylesheet %}
 <link href="{% static 'css/base.css' %}" rel="stylesheet" />
 
+
 {% endblock %} 
 
 {% block body %}
 <style>
+
   .card-body {
     padding: 10px;
   }
@@ -40,6 +42,14 @@
     margin-right: 5px;
     text-align: center;
   }
+
+  footer {
+    margin-top: 100px;
+}
+
+  #readmore {
+    text-decoration: underline;
+  } 
 
   [data-placeholder]:empty:before {
      content: attr(data-placeholder);
@@ -85,7 +95,7 @@ if (ce) {
 </div>
 
 
-<form id="comment_form" method="POST" action="{% url 'comments' slug=post.slug %}">
+<form id="comment_form" method="POST" action="{{ comment.get_absolute_url }}">
   {% csrf_token %}
   <input type="hidden" id="submit_comment" name="comment_body">
 </form>
@@ -110,13 +120,38 @@ if (ce) {
                 <span class="fa fa-user usericon"></span>{{comment.author}}
               </h5>
               <h6 class="card-subtitle mb-2 text-muted">{{comment.date_created}}</h6>
-              <div class="card-body">
-                {{comment.body | truncatechars:200}}<br /><a href="readmore">Read more...</a>
+              <div class="card-body" id="comment_body">
+                  {% if comment.body|length > 200 %}
+                    {{comment.body | truncatechars:200}} 
+                    <br>
+                    <button class="btn" onclick="readmore()" id="readmore">Read more...</button>
+
+                    <!-- Handle Read More Functionality -->
+                    <script>
+                      function readmore() {
+                        let text = $('#readmore').html()
+                        let states = ['Read more...', 'Read less...']
+                        if (text == states[0]){
+                          $('#comment_body').html('{{comment.body}} <br> <button class="btn" onclick="readmore()" id="readmore">Read less...</button>')
+                        } else {
+                          $('#comment_body').html('{{comment.body | truncatechars:200}} <br> <button class="btn" onclick="readmore()" id="readmore">Read more...</button>')
+                        }
+                      }
+                    </script>
+
+                  {% else %}
+
+                    {{comment.body}}
+
+                  {% endif %}
               </div>
             </div>
           </div>
         </div>
       </div>
+
+    
+
       {% endfor %}
 
       {% endblock %} 

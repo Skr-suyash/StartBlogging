@@ -66,6 +66,7 @@
 
         {{post.body | safe}}
         
+        <br>
         {% if post.is_draft == False %}
         <button onclick="location.href='/{{post.slug}}/comments'" type="button" class="btn btn-block btn-outline-success" style="border-radius: 5px;">Write a comment <i class="fa fa-comments"></i></button>
         {% endif %}

@@ -1,5 +1,7 @@
 from django.shortcuts import render, redirect, get_object_or_404, get_list_or_404
 from django.core.paginator import Paginator
+from django.http import Http404
+from django.contrib.auth.decorators import login_required
 from create_blog.models import Blog, Comment
 from django.utils import timezone
 
@@ -39,10 +41,18 @@ def delete(request, author, slug):
 
 ### For Comments
 
+@ login_required
 def comments(request, slug):
 
     post = get_object_or_404(Blog, slug=slug)
-    comments = get_list_or_404(Comment, post=post)
+    comments = []
+
+    try:
+        comments = get_list_or_404(Comment, post=post)
+    except Http404:
+        error = "No comments yet"
+        print(error)
+
 
     if (request.method == 'POST'):
         print(request.POST)
