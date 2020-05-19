@@ -4,6 +4,7 @@ from django.contrib.auth.decorators import login_required
 from .models import Profile
 from django.contrib import auth
 from accounts.backends import CustomBackend
+from django.http import request
 
 # Create your views here.
 def signup(request):
@@ -60,6 +61,8 @@ def create_profile(request):
         user.profile.skills = response['skills']
         user.profile.description = response['description']
         user.save()
+        return redirect('view_profile', user=request.user.username)        
+
 
     return render(request, 'accounts/create_profile.html')
 
@@ -82,3 +85,20 @@ def view_profile(request, user):
         'description': user.profile.description
     }
     return render(request, 'accounts/view_profile.html', {'user_profile': context})
+
+
+def edit_profile(request):
+
+    user = User.objects.get(username = request.user)
+
+    context = {
+        'first_name': user.first_name,
+        'last_name': user.last_name,
+        'organisation': user.profile.organisation,
+        'role': user.profile.role,
+        'skills': user.profile.skills,
+        'description': user.profile.description
+    }
+
+
+    return render(request, 'accounts/edit_profile.html', {'user_profile': context})

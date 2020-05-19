@@ -27,13 +27,18 @@
 </style>
 
 <header class="masthead">
-    <div class="overlay"></div>
+    <div class="overlay"><</div>
     <div class="container">
       <div class="row">
         <div class="col-lg-8 col-md-10 mx-auto">
           <div class="page-heading">
             <h2>User Profile of {{user_profile.username}}</h2>
             <div class="subheading">Works at {{user_profile.organisation}} as a {{user_profile.role}}</div>
+            {% if request.user.username == user_profile.username %}
+                <div class="col-12" style="margin-top: 20px;">
+                    <a href= "{% url 'edit_profile' %}" class="btn btn-primary float-right" style="font-size: large;">Edit Profile</a>
+                </div>            
+            {% endif %}
           </div>
         </div>
       </div>
@@ -65,7 +70,7 @@
             <hr>
             {% endif %}
             <br>
-            
+
             <h3 style="text-align: center; text-decoration: underline;">Skills</h3> 
             <p class="aboutme">{{user_profile.skills}}</p>
             <hr>

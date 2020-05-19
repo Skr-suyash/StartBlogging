@@ -33,16 +33,17 @@ $(function() {
         },
         cache: false,
         success: function() {
-          // Success message
-          $('#success').html("<div class='alert alert-success'>");
-          $('#success > .alert-success').html("<button type='button' class='close' data-dismiss='alert' aria-hidden='true'>&times;")
-            .append("</button>");
-          $('#success > .alert-success')
-            .append("<strong>Profile successfully completed! </strong>");
-          $('#success > .alert-success')
-            .append('</div>');
+          // // Success message
+          // $('#success').html("<div class='alert alert-success'>");
+          // $('#success > .alert-success').html("<button type='button' class='close' data-dismiss='alert' aria-hidden='true'>&times;")
+          //   .append("</button>");
+          // $('#success > .alert-success')
+          //   .append("<strong>Profile successfully completed! </strong>");
+          // $('#success > .alert-success')
+          //   .append('</div>');
           //clear all fields
-          $('#contactForm').trigger("reset");
+          console.log("hello")
+          window.location.replace("/accounts/"+user+"/profile/view");
         },
         error: function() {
           // Fail message

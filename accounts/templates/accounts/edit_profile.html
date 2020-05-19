@@ -20,7 +20,8 @@
         <div class="col-lg-8 col-md-10 mx-auto">
           <div class="page-heading">
             <h1>User Profile</h1>
-            <span class="subheading">Please complete your profile.</span>
+            <span class="subheading">Please edit your profile.</span>
+            <span class="subheading">The ones which are already present are your previous values.</span>
           </div>
         </div>
       </div>
@@ -36,7 +37,7 @@
           <div class="control-group">
             <div class="form-group floating-label-form-group controls">
               <label>First Name</label>
-              <input type="text" class="form-control" placeholder="First Name  *" id="first_name" required data-validation-required-message="Please enter your first name.">
+              <input type="text" class="form-control" placeholder="First Name  *" id="first_name" required data-validation-required-message="Please enter your first name." value="{{user_profile.first_name}}">
               <p class="help-block text-danger"></p>
             </div>
           </div>
@@ -44,7 +45,7 @@
           <div class="control-group">
             <div class="form-group floating-label-form-group controls">
               <label>Last Name</label>
-              <input type="text" class="form-control" placeholder="Last Name  *" id="last_name" required data-validation-required-message="Please enter your last name.">
+              <input type="text" class="form-control" placeholder="Last Name  *" id="last_name" required data-validation-required-message="Please enter your last name." value="{{user_profile.last_name}}">
               <p class="help-block text-danger"></p>
             </div>
           </div>
@@ -52,7 +53,7 @@
           <div class="control-group">
             <div class="form-group floating-label-form-group controls">
               <label>Organisation</label>
-              <input type="text" class="form-control" placeholder="Organisation  (optional)" id="organisation">
+              <input type="text" class="form-control" placeholder="Organisation  (optional)" id="organisation" value="{{user_profile.organisation}}">
               <p class="help-block text-danger"></p>
             </div>
           </div>
@@ -60,7 +61,7 @@
           <div class="control-group">
             <div class="form-group floating-label-form-group controls">
               <label>Role</label>
-              <input type="text" class="form-control" placeholder="Role  (optional)" id="role" maxlength="100">
+              <input type="text" class="form-control" placeholder="Role  (optional)" id="role" maxlength="100" value="{{user_profile.role}}">
               <p class="help-block text-danger"></p>
             </div>
           </div>
@@ -68,7 +69,8 @@
           <div class="control-group">
             <div class="form-group floating-label-form-group controls">
               <label>Skills</label>
-              <textarea rows="5" class="form-control" placeholder="Skills  * (300 chars.)" id="skills" maxlength="300" required data-validation-required-message="Please fill up skills."></textarea>
+              <textarea rows="5" class="form-control" placeholder="Skills  * (300 chars.)" id="skills" maxlength="300" required data-validation-required-message="Please fill up skills.">{{user_profile.skills}}</textarea>
+              <h4></h4>
               <p class="help-block text-danger"></p>
           </div>
           </div>
@@ -76,7 +78,8 @@
           <div class="control-group">
             <div class="form-group floating-label-form-group controls">
               <label>About You In Brief</label>
-              <textarea id="description" rows="5" class="form-control" placeholder="About You In Brief   (600 chars)" maxlength="600" ></textarea>
+              <textarea id="description" rows="5" class="form-control" placeholder="About You In Brief   (600 chars)" maxlength="600" >{{user_profile.description}}</textarea>
+              <h4></h4>
               <p class="help-block text-danger"></p>
           </div>
           </div>
@@ -84,7 +87,7 @@
           <br>
           <div id="success"></div>
           <div class="form-group">
-            <button type="submit" class="btn btn-primary" id="sendMessageButton">Upload</button>
+            <button type="submit" class="btn btn-primary" id="sendMessageButton">Update</button>
           </div>
         </form>
       </div>
@@ -97,7 +100,7 @@
 
 {% block custom_scripts %}
 
-    <script>var token = '{{csrf_token}}'; var user = '{{request.user.username}}'</script>
+    <script>var token = '{{csrf_token}}';</script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script src="{% static 'js/jqBootstrapValidation.js' %}"></script>
     <script src="{% static 'js/validate_and_send.js' %}"></script>

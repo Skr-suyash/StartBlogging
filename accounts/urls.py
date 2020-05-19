@@ -7,5 +7,7 @@ urlpatterns = [
     path(r'logout', accounts.views.logout, name='logout'),
     path('profile/create', accounts.views.create_profile, name='create_profile'),
     path('<str:user>/profile/view', accounts.views.view_profile, name='view_profile'),
+    path('profile/edit', accounts.views.edit_profile, name='edit_profile'),
+
 ]
 
