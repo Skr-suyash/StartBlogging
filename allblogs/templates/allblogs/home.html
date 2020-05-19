@@ -68,7 +68,7 @@
         <a class="navbar-brand dropdown-toggle fa fa-user-circle" href="#" id="navbarDropdownMenuLink" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="font-size: larger;">
         </a>
         <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-          <a class="dropdown-item" href="#" style="text-align: center;"><span style="float: left; text-align: center;" class="fa fa-user-circle"></span>{{request.user}}</a>
+          <a class="dropdown-item" href="{% url 'view_profile' request.user %}" style="text-align: center;"><span style="float: left; text-align: center;" class="fa fa-user-circle"></span>{{request.user}}</a>
           <a class="dropdown-item" href="{% url 'myposts' request.user %}">My Posts</a>
           <a class="dropdown-item" href="{% url 'drafts' request.user %}">Drafts</a>
           <a class="dropdown-item" href="{% url 'logout' %}">Sign Out</a>
@@ -112,7 +112,7 @@
             {% endif %}
           </a>
           <p class="post-meta">Posted by
-            <a href="#">{{post.author}}</a>
+            <a href="{% url 'view_profile' post.author %}">{{post.author}}</a>
             on {{post.published_date | localtime}}</p>
         </div>
         <hr>
@@ -124,9 +124,6 @@
             <a class="btn btn-primary float-left" href="?page={{ page_obj.previous_page_number }} #preview">&larr; Newer posts</a>
       {% endif %}
 
-      <!-- <span class="current">
-          Page {{ page_obj.number }} of {{ page_obj.paginator.num_pages }}.
-      </span> -->
 
       {% if page_obj.has_next %}
         <a class="btn btn-primary btn float-right" href="?page={{ page_obj.next_page_number }} #preview">Older Posts &rarr;</a>

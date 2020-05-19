@@ -1,5 +1,7 @@
 from django.shortcuts import render, redirect
 from django.contrib.auth.models import User
+from django.contrib.auth.decorators import login_required
+from .models import Profile
 from django.contrib import auth
 from accounts.backends import CustomBackend
 
@@ -40,3 +42,43 @@ def login(request):
 def logout(request):
     auth.logout(request)
     return redirect('home')
+
+
+## Everything about User
+
+@ login_required
+def create_profile(request):
+
+    user = User.objects.get(username = request.user.username)
+
+    if (request.method == 'POST'):
+        response = request.POST
+        user.first_name = response['first_name']
+        user.last_name = response['last_name']
+        user.profile.organisation = response['organisation']
+        user.profile.role = response['role']
+        user.profile.skills = response['skills']
+        user.profile.description = response['description']
+        user.save()
+
+    return render(request, 'accounts/create_profile.html')
+
+
+# View user's profile
+
+@ login_required
+def view_profile(request, user):
+
+    user = User.objects.get(username = user)
+
+    context = {
+        'username': user.username,
+        'email': user.email,
+        'first_name': user.first_name,
+        'last_name': user.last_name,
+        'organisation': user.profile.organisation,
+        'role': user.profile.role,
+        'skills': user.profile.skills,
+        'description': user.profile.description
+    }
+    return render(request, 'accounts/view_profile.html', {'user_profile': context})
