@@ -7,13 +7,27 @@ from django.utils import timezone
 
 
 def home(request):
+
+    print(request.user.date_joined)
+
+    first_joined = False
     
+    if (request.user.is_authenticated):
+        if (request.user.date_joined == request.user.last_login):
+            first_joined = True
+    print(first_joined)
+
     posts = Blog.objects.filter(is_draft=False).filter(published_date__lte=timezone.now()).order_by('-published_date')
     paginator = Paginator(posts, 4)
     page_number = request.GET.get('page')
     page_obj = paginator.get_page(page_number)
 
-    return render(request, 'allblogs/home.html', {'page_obj': page_obj})
+    return render(request, 'allblogs/home.html', {'page_obj': page_obj, 'first_joined': first_joined})
+
+
+def post_detail(request, slug):
+    post = get_object_or_404(Blog, slug=slug)
+    return render(request, 'allblogs/post_detail.html', {'post': post})
 
 
 def drafts(request, author):

@@ -1,21 +1,20 @@
-<!DOCTYPE html>
-<html lang="en">
+{% extends 'blogapp/base.html' %}
 {% load static %}
-<head>
-	<title>Sign Up</title>
-	<meta charset="UTF-8">
-	<meta name="viewport" content="width=device-width, initial-scale=1">
-<!--===============================================================================================-->
-	<link rel="stylesheet" type="text/css" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
-<!--===============================================================================================-->
-	<link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 
-    <link href="https://fonts.googleapis.com/css2?family=Fira+Sans:wght@900&display=swap" rel="stylesheet">
+	{% block title %} Create an Account {% endblock %}
 
-	<link rel="stylesheet" type="text/css" href="{% static 'css/util.css' %}">
-	<link rel="stylesheet" type="text/css" href="{% static 'css/login.css' %}">
+	{% block custom_fonts %}
+		<link href="https://fonts.googleapis.com/css2?family=Fira+Sans:wght@900&display=swap" rel="stylesheet">
+	{% endblock %}
 
-</head>
+	{% block custom_stylesheet %}
+		<link rel="stylesheet" type="text/css" href="{% static 'css/util.css' %}">
+		<link rel="stylesheet" type="text/css" href="{% static 'css/login.css' %}">
+		<link rel="stylesheet" type="text/css" href="{% static 'css/base.css' %}">
+	{% endblock %}
+
+{% block body %}
+
 <body>
 	
 	<div class="limiter">
@@ -88,15 +87,5 @@
 	</div>
 	
 	
-
+{% endblock %}
 	
-<!--===============================================================================================-->	
-    <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
-<!--===============================================================================================-->
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
-<!--===============================================================================================-->
-    <script src="{% static 'js/validate.js' %}"></script>
-<!--===============================================================================================-->
-
-</body>
-</html>

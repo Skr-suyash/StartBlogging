@@ -18,7 +18,6 @@ from django.urls import path, include
 import allblogs.views
 import accounts
 import create_blog
-import post_detail
 
 urlpatterns = [
     path('admin/', admin.site.urls),
@@ -29,6 +28,6 @@ urlpatterns = [
     path('accounts/', include('accounts.urls')),    
     path('create_blog/', include('create_blog.urls')),
     path('<slug:slug>/comments', allblogs.views.comments, name='comments'),
-    path('post_detail/', include('post_detail.urls')),
+    path('post_detail/<slug:slug>', allblogs.views.post_detail, name="post_detail"),
 
 ]

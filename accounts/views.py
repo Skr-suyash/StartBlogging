@@ -34,7 +34,7 @@ def login(request):
             auth.login(request, user)
             return redirect('home')
         else:
-            return render(request, 'accounts/login.html', {'error': 'Not a valid username or password'})
+            return render(request, 'accounts/login.html', {'error': 'Not a valid email or password'})
             print('Not working')
     else:
         return render(request, 'accounts/login.html', {'error': 'Please login for Writing and Commenting privileges'})

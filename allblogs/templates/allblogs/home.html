@@ -27,22 +27,36 @@
 
 <body>
 
+  
   <!-- Navigation -->
   <nav class="navbar navbar-expand-lg navbar-light fixed-top" id="mainNav">
     <div class="container">
-      <svg class="bi bi-bootstrap-fill" width="2em" height="2em" viewBox="0 0 16 16" fill="white" xmlns="http://www.w3.org/2000/svg">
+      <a href="{% url 'home' %}"> <svg class="bi bi-bootstrap-fill icon" fill="rgb(86, 61, 124)" width="2em" height="2em" viewBox="0 0 16 16" xmlns="http://www.w3.org/2000/svg">
 				<path fill-rule="evenodd" d="M4.002 0a4 4 0 00-4 4v8a4 4 0 004 4h8a4 4 0 004-4V4a4 4 0 00-4-4h-8zm1.06 12h3.475c1.804 0 2.888-.908 2.888-2.396 0-1.102-.761-1.916-1.904-2.034v-.1c.832-.14 1.482-.93 1.482-1.816 0-1.3-.955-2.11-2.542-2.11H5.062V12zm1.313-4.875V4.658h1.78c.973 0 1.542.457 1.542 1.237 0 .802-.604 1.23-1.764 1.23H6.375zm0 3.762h1.898c1.184 0 1.81-.48 1.81-1.377 0-.885-.65-1.348-1.886-1.348H6.375v2.725z" clip-rule="evenodd"/>
-			</svg>
+			</svg> </a>
       <a class="navbar-brand" href="{% url 'home' %}">Start Blogging</a>
       <!-- Login and Sign Up buttons-->
       
       {% if user.is_authenticated %}
-        <a class="navbar-brand" href="index.html" style="font-size: medium;">{{user.get_username|truncatewords:1}}</a>
+        <a class="navbar-brand" href="{% url 'view_profile' request.user %}" style="font-size: medium;">{{user.get_username|truncatewords:1}}</a>
       {% else %}
-        <form action="{% url 'login' %}" method="GET">
-          <button class="btn btn-primary" style="border-radius: 10px; height: 3em; text-align: center; margin-right: 10px;">Login</button>
-        </form>
+          <a href="{% url 'login' %}" class="btn btn-primary" style="border-radius: 10px; height: 3em; text-align: center; margin-right: 10px; margin-top: 10px;">Login</a>
       {% endif %}
+
+      {% if user.is_authenticated %}
+      <li class="nav-item dropdown" style="list-style-type: none;">
+        <a class="navbar-brand dropdown-toggle fa fa-user-circle" href="#" id="navbarDropdownMenuLink" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="font-size: larger;">
+        </a>
+        <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+          <a class="dropdown-item" href="{% url 'view_profile' request.user %}" style="text-align: center;"><span style="float: left; text-align: center;" class="fa fa-user-circle"></span>{{user.get_username|truncatewords:1}}</a>
+          <a class="dropdown-item" href="{% url 'myposts' request.user %}">My Posts</a>
+          <a class="dropdown-item" href="{% url 'drafts' request.user %}">Drafts</a>
+          <a class="dropdown-item" href="{% url 'logout' %}">Sign Out</a>
+        </div>
+      </li>
+      {% endif %} 
+
+
 
       <button class="navbar-toggler navbar-toggler-right" style="float: right;" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
         Menu
@@ -63,20 +77,7 @@
         </ul>
       </div>
     
-      {% if user.is_authenticated %}
-      <li class="nav-item dropdown" style="list-style-type: none;">
-        <a class="navbar-brand dropdown-toggle fa fa-user-circle" href="#" id="navbarDropdownMenuLink" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="font-size: larger;">
-        </a>
-        <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-          <a class="dropdown-item" href="{% url 'view_profile' request.user %}" style="text-align: center;"><span style="float: left; text-align: center;" class="fa fa-user-circle"></span>{{request.user}}</a>
-          <a class="dropdown-item" href="{% url 'myposts' request.user %}">My Posts</a>
-          <a class="dropdown-item" href="{% url 'drafts' request.user %}">Drafts</a>
-          <a class="dropdown-item" href="{% url 'logout' %}">Sign Out</a>
-        </div>
-      </li>
-      {% endif %} 
-
-
+      
     </div>
   </nav>
 
@@ -118,17 +119,18 @@
         <hr>
         {% endfor %}
         <div id="preview"></div>
-        
-<div class="clearfix">
-      {% if page_obj.has_previous %}
-            <a class="btn btn-primary float-left" href="?page={{ page_obj.previous_page_number }} #preview">&larr; Newer posts</a>
-      {% endif %}
 
+    <div class="clearfix">
+          {% if page_obj.has_previous %}
+                <a class="btn btn-primary float-left" href="?page={{ page_obj.previous_page_number }} #preview" style="margin-bottom: 10px;">&larr; Newer posts</a>
+          {% endif %}
+            </div>
 
-      {% if page_obj.has_next %}
-        <a class="btn btn-primary btn float-right" href="?page={{ page_obj.next_page_number }} #preview">Older Posts &rarr;</a>
-      {% endif %}
-</div>
+          {% if page_obj.has_next %}
+            <a class="btn btn-primary btn float-right" href="?page={{ page_obj.next_page_number }} #preview">Older Posts &rarr;</a>
+          {% endif %}
+    </div>
+      </div>
 
   <hr>
 
@@ -174,6 +176,34 @@
   <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
   <!-- Custom scripts for this template -->
 
+  <!-- Model Popup to guide the user to complete the profile -->
+  {% if first_joined %}
+  <!-- <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          ...
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+          <button type="button" class="btn btn-primary">Save changes</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+    <script>
+      $(document).ready(function(){
+          $("#exampleModal").one().modal()
+      });
+    </script>
+{% endif %} -->
 
 </body>
 

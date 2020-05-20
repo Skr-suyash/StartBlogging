@@ -24,7 +24,7 @@
             <h2 class="subheading">{{post.description | safe}}</h2>
             {% if post.is_draft == False %}
               <span class="meta">Posted by
-                <a href="#">{{post.author}}</a>
+                <a href="{% url 'view_profile' post.author %}">{{post.author}}</a>
                 on {{post.published_date}}</span>
             {% else %}
               <span class="meta">Created by

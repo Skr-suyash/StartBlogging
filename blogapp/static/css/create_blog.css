@@ -19,8 +19,9 @@ li {
 
 .text.title{
     font-family: Verdana, Geneva, Tahoma, sans-serif;
-    font-size: 3em;
-    font-weight: 500;
+    font-size: 2em;
+    font-weight: 400;
+    overflow: hidden;
 }
 
 .text.body {

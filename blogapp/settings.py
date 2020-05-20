@@ -35,7 +35,6 @@ INSTALLED_APPS = [
     'allblogs',
     'accounts',
     'create_blog',
-    'post_detail',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
