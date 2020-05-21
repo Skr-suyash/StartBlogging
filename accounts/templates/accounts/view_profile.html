@@ -33,12 +33,18 @@
         <div class="col-lg-8 col-md-10 mx-auto">
           <div class="page-heading">
             <h2>User Profile of {{user_profile.username}}</h2>
+
+            {% if user_profile.organisation != "" %}
             <div class="subheading">Works at {{user_profile.organisation}} as a {{user_profile.role}}</div>
+            {% endif %}
+            
+            <!-- Show edit button if user is current user -->
             {% if request.user.username == user_profile.username %}
                 <div class="col-12" style="margin-top: 20px;">
                     <a href= "{% url 'edit_profile' %}" class="btn btn-primary float-right" style="font-size: large;">Edit Profile</a>
                 </div>            
             {% endif %}
+
           </div>
         </div>
       </div>

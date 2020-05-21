@@ -16,60 +16,65 @@
 <div class="container" style="padding-top: 80px;">
     <div class="row">
       <h3 style="margin-left: 10px; margin-bottom: 20px; margin-top: 40px;">My Posts</h3>
-      <div class="col-lg-8 col-md-10 mx-auto" style="margin-top: 20px;">
-        {% for post in myposts.all %}
-        <div class="post-preview">
-          <a href="{{post.get_absolute_url}}">
-            <h2 class="post-title">
-              {{post.title}}
-            </h2>
-            {% if post.description != None %}
-            <h3 class="post-subtitle">
-              {{post.description}}
-            </h3>
-            {% endif %}
-          </a>
-          <p class="post-meta">Posted by
-            <a href="#">{{post.author}}</a>
-            on {{post.published_date | localtime}}</p>
-        </div>
-        <a class="btn btn-primary" href="/create_blog/edit/{{post.slug}}">(Edit) &#9998;</i></a>
-        <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#exampleModal" style="color: white;">
-          Delete <i class="fa fa-trash" style="font-size: large;"></i>
-        </button>
-        <hr>
 
-        <!-- Modal -->
-        <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-          <div class="modal-dialog" role="document">
-            <div class="modal-content">
-              <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel">Delete Confirmation</h5>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                  <span aria-hidden="true">&times;</span>
-                </button>
-              </div>
-              <div class="modal-body">
-                Do you really want to delete this blog post?
-              </div>
-              <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
-                <a href="{% url 'delete' author=request.user slug=post.slug %}" type="button" class="btn btn-primary">Confirm</a>
+      <div class="col-lg-8 col-md-10 mx-auto" style="margin-top: 20px;">
+
+        {% if myposts %}
+          {% for post in myposts.all %}
+          <div class="post-preview">
+            <a href="{{post.get_absolute_url}}">
+              <h2 class="post-title">
+                {{post.title}}
+              </h2>
+              {% if post.description != None %}
+              <h3 class="post-subtitle">
+                {{post.description}}
+              </h3>
+              {% endif %}
+            </a>
+            <p class="post-meta">Posted by
+              <a href="#">{{post.author}}</a>
+              on {{post.published_date | localtime}}</p>
+          </div>
+          <a class="btn btn-primary" href="/create_blog/edit/{{post.slug}}">(Edit) &#9998;</i></a>
+          <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#exampleModal" style="color: white;">
+            Delete <i class="fa fa-trash" style="font-size: large;"></i>
+          </button>
+          <hr>
+
+          <!-- Modal -->
+          <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <h5 class="modal-title" id="exampleModalLabel">Delete Confirmation</h5>
+                  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                  </button>
+                </div>
+                <div class="modal-body">
+                  Do you really want to delete this blog post?
+                </div>
+                <div class="modal-footer">
+                  <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+                  <a href="{% url 'delete' author=request.user slug=post.slug %}" type="button" class="btn btn-primary">Confirm</a>
+                </div>
               </div>
             </div>
           </div>
-        </div>
 
-        {% endfor %}
-        
+          {% endfor %}
+
+          {% else %}
+            <h4 style="margin-top: 8em; margin-bottom: 4em; text-align: center; color: red;">No posts to display!</h4>
+        {% endif %}
+
+
       </div>
     </div>
   </div>
 
   <hr>
-
-
-
   
 {% endblock %}
 

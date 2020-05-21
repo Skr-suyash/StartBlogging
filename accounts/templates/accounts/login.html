@@ -36,7 +36,7 @@
 						Member Login
 					</span>
 
-					<div class="wrap-input100 validate-input">
+					<div class="wrap-input100 validate-input" data-validate = "Email is required">
 						<input class="input100" type="text" name="email" placeholder="Email">
 						<span class="focus-input100"></span>
 						<span class="symbol-input100">
@@ -44,7 +44,7 @@
 						</span>
 					</div>
 
-					<div class="wrap-input100 validate-input">
+					<div class="wrap-input100 validate-input" data-validate = "Password is required">
 						<input class="input100" type="password" name="password" placeholder="Password">
 						<span class="focus-input100"></span>
 						<span class="symbol-input100">
@@ -70,6 +70,13 @@
 			</div>
 		</div>
 	</div>
+	
+	{% block custom_scripts %}
+
+	<script src="{% static 'js/validate.js' %}"></script>
+
+	{% endblock %}
+    
 	
 	
 {% endblock %}

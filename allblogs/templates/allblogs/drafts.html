@@ -17,52 +17,58 @@
     <div class="row">
         <h3 style="margin-left: 10px; margin-bottom: 20px; margin-top: 40px;">Drafts</h3>
       <div class="col-lg-8 col-md-10 mx-auto">
-        {% for draft in drafts.all %}
-        <div class="post-preview">
-          <a href="{{draft.get_absolute_url}}">
-            <h2 class="post-title">
-              {{draft.title}}
-            </h2>
-            {% if draft.description != None %}
-            <h3 class="post-subtitle">
-              {{draft.description}}
-            </h3>
-            {% endif %}
-          </a>
-          <p class="post-meta">Created by
-            <a href="#">{{draft.author}}</a>
-            on {{draft.date_created | localtime}}</p>
 
-            <a class="btn btn-primary" href="/create_blog/edit/{{draft.slug}}" style="color: white;">(Edit) &#9998;</i></a>
-        <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#exampleModal" style="color: white;">
-          Delete <i class="fa fa-trash" style="font-size: large;"></i>
-        </button>
+        {% if drafts %}
+          {% for draft in drafts.all %}
+          <div class="post-preview">
+            <a href="{{draft.get_absolute_url}}">
+              <h2 class="post-title">
+                {{draft.title}}
+              </h2>
+              {% if draft.description != None %}
+              <h3 class="post-subtitle">
+                {{draft.description}}
+              </h3>
+              {% endif %}
+            </a>
+            <p class="post-meta">Created by
+              <a href="#">{{draft.author}}</a>
+              on {{draft.date_created | localtime}}</p>
 
-        <!-- Modal -->
-        <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-          <div class="modal-dialog" role="document">
-            <div class="modal-content">
-              <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel">Delete Confirmation</h5>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                  <span aria-hidden="true">&times;</span>
-                </button>
-              </div>
-              <div class="modal-body">
-                Do you really want to delete this blog post?
-              </div>
-              <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
-                <a href="{% url 'delete' author=request.user slug=draft.slug %}" type="button" class="btn btn-primary">Confirm</a>
+              <a class="btn btn-primary" href="/create_blog/edit/{{draft.slug}}" style="color: white;">(Edit) &#9998;</i></a>
+          <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#exampleModal" style="color: white;">
+            Delete <i class="fa fa-trash" style="font-size: large;"></i>
+          </button>
+
+          <!-- Modal -->
+          <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <h5 class="modal-title" id="exampleModalLabel">Delete Confirmation</h5>
+                  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                  </button>
+                </div>
+                <div class="modal-body">
+                  Do you really want to delete this blog post?
+                </div>
+                <div class="modal-footer">
+                  <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+                  <a href="{% url 'delete' author=request.user slug=draft.slug %}" type="button" class="btn btn-primary">Confirm</a>
+                </div>
               </div>
             </div>
           </div>
-        </div>
 
-        </div>
-        <hr>
-        {% endfor %}
-        
+          </div>
+          <hr>
+          {% endfor %}
+        {% else %}
+
+          <h4 style="margin-top: 8em; margin-bottom: 4em; text-align: center; color: red;">No drafts to display!</h4>
+        {% endif %}
+
       </div>
     </div>
   </div>

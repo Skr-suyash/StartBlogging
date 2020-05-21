@@ -8,14 +8,11 @@ from django.utils import timezone
 
 def home(request):
 
-    print(request.user.date_joined)
-
     first_joined = False
     
     if (request.user.is_authenticated):
-        if (request.user.date_joined == request.user.last_login):
+        if (request.user.first_name == "" and request.user.first_name == ""):
             first_joined = True
-    print(first_joined)
 
     posts = Blog.objects.filter(is_draft=False).filter(published_date__lte=timezone.now()).order_by('-published_date')
     paginator = Paginator(posts, 4)

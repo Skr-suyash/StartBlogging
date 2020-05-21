@@ -117,7 +117,7 @@ if (ce) {
           <div class="col-lg-7 col-md-9 col-sm-12 col-centered">
             <div class="card" style="margin-top: 20px;">
               <h5 class="card-title">
-                <span class="fa fa-user usericon"></span>{{comment.author}}
+                <a href="{% url 'view_profile' comment.author %}"><span class="fa fa-user usericon"></span>{{comment.author}}</a>
               </h5>
               <h6 class="card-subtitle mb-2 text-muted">{{comment.date_created}}</h6>
               <div class="card-body" id="comment_body">
