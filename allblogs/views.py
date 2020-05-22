@@ -21,7 +21,7 @@ def home(request):
 
     return render(request, 'allblogs/home.html', {'page_obj': page_obj, 'first_joined': first_joined})
 
-
+@ login_required
 def post_detail(request, slug):
     post = get_object_or_404(Blog, slug=slug)
     return render(request, 'allblogs/post_detail.html', {'post': post})
@@ -42,7 +42,7 @@ def myposts(request, author):
 
     return render(request, 'allblogs/myposts.html', {'myposts': myposts})
 
-
+@ login_required
 def delete(request, author, slug):
 
     post_to_be_deleted = get_object_or_404(Blog,slug=slug)
@@ -66,15 +66,18 @@ def comments(request, slug):
 
 
     if (request.method == 'POST'):
-        print(request.POST)
         comment = Comment()
         comment.post = post
         comment.author = request.user
         comment.body = request.POST['comment_body']
-        print(request.POST['comment_body'])
         comment.date_created = timezone.now()
         comment.save()
         return redirect('comments', slug=post.slug)
     
     return render(request, 'allblogs/create_comment.html', {'post': post, 'comments':comments})
+
+
+def about(request):
+
+    return render(request, 'allblogs/about.html')
 

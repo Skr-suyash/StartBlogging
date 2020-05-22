@@ -1,0 +1,48 @@
+{% extends 'blogapp/base.html' %}
+
+{% load static %}
+
+{% block custom_fonts %}
+
+{% endblock %}
+
+{% block custom_stylesheet %}
+    <link href="{% static 'css/base.css' %}" rel="stylesheet">
+{% endblock %}
+
+{% block body %}
+
+<header class="masthead" style="background-image: url('{{STATIC_ROOT.0}}/static/images/about-bg.jpg');">
+    <div class="overlay"></div>
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-8 col-md-10 mx-auto">
+          <div class="page-heading">
+            <h1>About Start Blogging</h1>
+            <span class="subheading">About the BlogApp</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <!-- Main Content -->
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-8 col-md-10 mx-auto">
+        <p>This is a full-fledged Blog app built using Django built by me.</p>
+        <p>It has a lot of features using a full-featured Editor, Comments feature, Drafts feature and Profile</p>
+        <p>This BlogApp was built as a personal project.</p>
+      </div>
+    </div>
+  </div>
+
+  <hr>
+
+  
+{% endblock %}
+
+{% block custom_scripts %}
+      
+{% endblock %}
+    

@@ -29,5 +29,6 @@ urlpatterns = [
     path('create_blog/', include('create_blog.urls')),
     path('<slug:slug>/comments', allblogs.views.comments, name='comments'),
     path('post_detail/<slug:slug>', allblogs.views.post_detail, name="post_detail"),
+    path('about', allblogs.views.about, name="about"),
 
 ]

@@ -9,7 +9,6 @@ from django.contrib.auth.decorators import login_required
 def create_post(request):
 
     if (request.method == 'POST'):
-        print(request.POST)
         if (request.POST['is_draft'] == 'False'):
             post = Blog()
             post.author = request.user
@@ -28,6 +27,8 @@ def create_post(request):
             post.is_draft = True
             post.save()
             return redirect(post.get_absolute_url())
+            # print(request.POST['title'].isspace())
+
     else: 
         return render(request, 'create_blog/create_post.html')
 

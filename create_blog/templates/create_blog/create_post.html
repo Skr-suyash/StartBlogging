@@ -42,7 +42,7 @@
 		  <form class="form-inline">
 				<a class="navbar-brand btn btn-primary saveButton" onclick="save()"><span class="fa fa-save" style="font-size: larger;" ></span></a>
 				<a class="navbar-brand btn btn-success publishbutton" onclick="publish()">Publish</a>
-			</form>
+		  </form>
 			
 			<div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
 			  <a class="dropdown-item" href="{% url 'view_profile' request.user %}" style="text-align: center;"><span style="float: left; text-align: center;" class="fa fa-user-circle"></span>{{request.user}}</a>
@@ -71,7 +71,28 @@
 		<script src="{% static 'js/create_post.js' %}"></script>
 	  </div>
 
+<!-- Modal to display the title is empty  -->
+	  <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+		<div class="modal-dialog" role="document">
+		  <div class="modal-content">
+			<div class="modal-header">
+			  <h5 class="modal-title" id="exampleModalLabel">Title Empty</h5>
+			  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+				<span aria-hidden="true">&times;</span>
+			  </button>
+			</div>
+			<div class="modal-body" id=modal_body>
+			  Title cannot be empty. Please fill the title.
+			</div>
+			<div class="modal-footer">
+			  <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+			</div>
+		  </div>
+		</div>
+	  </div>
 	  
+	  
+	<!-- Styling  -->
 	  <style>
 		blockquote {
 		  margin-left: 20px;

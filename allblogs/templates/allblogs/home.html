@@ -72,7 +72,7 @@
             <a class="navbar-brand" href="{% url 'create_post' %}">Write</a>
           </li>
           <li class="nav-item">
-            <a class="navbar-brand" href="post.html">About</a>
+            <a class="navbar-brand" href="{% url 'about' %}">About</a>
           </li>                
         </ul>
       </div>
@@ -82,7 +82,7 @@
   </nav>
 
   <!-- Page Header -->
-  <header class="masthead" style="background-image: url('{{STATICFILES_DIRS.0}}/static/images/home-bg.jpg');">
+  <header class="masthead" style="background-image: url('{{STATIC_ROOT.0}}/static/images/home-bg.jpg');">
     <div class="overlay"></div>
     <div class="container">
       <div class="row">
@@ -200,7 +200,7 @@
 
     <script>
       $(document).ready(function(){
-          $("#exampleModal").one().modal()
+          $("#exampleModal").modal()
       });
     </script>
 {% endif %}
