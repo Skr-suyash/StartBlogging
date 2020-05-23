@@ -38,16 +38,10 @@
       <!-- Login and Sign Up buttons-->
       
       {% if user.is_authenticated %}
-        <a class="navbar-brand" href="{% url 'view_profile' request.user %}" style="font-size: medium;">{{user.get_username|truncatewords:1}}</a>
-      {% else %}
-          <a href="{% url 'login' %}" class="btn btn-primary" style="border-radius: 10px; height: 3em; text-align: center; margin-right: 10px; margin-top: 10px;">Login</a>
-      {% endif %}
-
-      {% if user.is_authenticated %}
       <li class="nav-item dropdown" style="list-style-type: none;">
         <a class="navbar-brand dropdown-toggle fa fa-user-circle" href="#" id="navbarDropdownMenuLink" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="font-size: larger;">
         </a>
-        <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+        <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdownMenuLink">
           <a class="dropdown-item" href="{% url 'view_profile' request.user %}" style="text-align: center;"><span style="float: left; text-align: center;" class="fa fa-user-circle"></span>{{user.get_username|truncatewords:1}}</a>
           <a class="dropdown-item" href="{% url 'myposts' request.user %}">My Posts</a>
           <a class="dropdown-item" href="{% url 'drafts' request.user %}">Drafts</a>
@@ -55,6 +49,13 @@
         </div>
       </li>
       {% endif %} 
+
+
+      {% if user.is_authenticated %}
+        <a class="navbar-brand" href="{% url 'view_profile' request.user %}" style="font-size: medium;">{{user.get_username|truncatewords:1}}</a>
+      {% else %}
+          <a href="{% url 'login' %}" class="btn btn-primary" style="border-radius: 10px; height: 3em; text-align: center; margin-right: 10px; margin-top: 10px;">Login</a>
+      {% endif %}
 
 
 
@@ -173,6 +174,7 @@
 
   <!-- Bootstrap core JavaScript -->
   <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
   <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
   <!-- Custom scripts for this template -->
 
