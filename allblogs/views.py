@@ -21,7 +21,6 @@ def home(request):
 
     return render(request, 'allblogs/home.html', {'page_obj': page_obj, 'first_joined': first_joined})
 
-@ login_required
 def post_detail(request, slug):
     post = get_object_or_404(Blog, slug=slug)
     return render(request, 'allblogs/post_detail.html', {'post': post})
